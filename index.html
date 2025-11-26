@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PRO × ARMY (PXA) | VIP</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #00e5ff;
+      --secondary: #2979ff;
+      --accent: #7c4dff;
+      --gold: #ffab00;
+      --dark: #0a0a0a;
+      --darker: #050505;
+      --text: #e0e0e0;
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--darker), #121212, #1a1a2e);
+      color: var(--text);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    /* Animated background */
+    .bg-elements {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .bg-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(18, 18, 18, 0.9) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18, 18, 18, 0.9) 1px, transparent 1px);
+      background-size: 50px 50px;
+      opacity: 0.3;
+    }
+
+    .bg-element {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.1;
+      animation: float 25s infinite linear;
+      filter: blur(40px);
+    }
+
+    .bg-element:nth-child(1) {
+      width: 300px;
+      height: 300px;
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+      background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+    }
+
+    .bg-element:nth-child(2) {
+      width: 400px;
+      height: 400px;
+      top: 70%;
+      left: 80%;
+      animation-delay: -8s;
+      background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+    }
+
+    .bg-element:nth-child(3) {
+      width: 250px;
+      height: 250px;
+      top: 20%;
+      left: 85%;
+      animation-delay: -15s;
+      background: radial-gradient(circle, var(--secondary) 0%, transparent 70%);
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg) scale(1); }
+      33% { transform: translateY(-40px) rotate(120deg) scale(1.1); }
+      66% { transform: translateY(30px) rotate(240deg) scale(0.9); }
+      100% { transform: translateY(0) rotate(360deg) scale(1); }
+    }
+
+    .card {
+      background: rgba(15, 15, 20, 0.8);
+      border-radius: 24px;
+      padding: 45px 35px;
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5),
+                 0 0 0 1px rgba(255, 255, 255, 0.03),
+                 inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      text-align: center;
+      width: 100%;
+      max-width: 480px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                  box-shadow 0.4s ease;
+      animation: cardEntrance 1s ease-out;
+    }
+
+    @keyframes cardEntrance {
+      0% { opacity: 0; transform: translateY(30px) scale(0.95); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6),
+                  0 0 0 1px rgba(255, 255, 255, 0.05),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, 
+                transparent, 
+                var(--primary), 
+                var(--accent), 
+                transparent);
+      animation: shine 3s infinite;
+    }
+
+    @keyframes shine {
+      0% { opacity: 0; }
+      50% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    .logo {
+      position: relative;
+      margin-bottom: 30px;
+    }
+
+    .logo-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .logo img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 30px rgba(0, 229, 255, 0.3),
+                  inset 0 0 20px rgba(0, 229, 255, 0.1);
+      transition: all 0.4s ease;
+      position: relative;
+      z-index: 1;
+      filter: brightness(1.1) contrast(1.1);
+    }
+
+    .logo-container::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, var(--primary), var(--secondary), var(--accent), var(--primary));
+      z-index: 0;
+      animation: rotate 8s linear infinite;
+      opacity: 0.7;
+    }
+
+    .logo-container::after {
+      content: '';
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      border-radius: 50%;
+      background: rgba(15, 15, 20, 0.9);
+      z-index: 0;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .logo img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 40px rgba(0, 229, 255, 0.5),
+                  inset 0 0 25px rgba(0, 229, 255, 0.2);
+    }
+
+    .title-container {
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .title {
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #ffffff;
+      position: relative;
+      display: inline-block;
+      height: 60px;
+      overflow: hidden;
+    }
+
+    .typing-container {
+      display: inline-block;
+      position: relative;
+    }
+
+    .typing-text {
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      color: #ffffff;
+      width: 0;
+      animation: typing 2s steps(16, end) forwards;
+      animation-delay: 0.5s;
+    }
+
+    .cursor {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 3px;
+      height: 100%;
+      background-color: var(--primary);
+      animation: blink-caret 0.75s step-end infinite;
+    }
+
+    .typing-text.completed + .cursor {
+      animation: blink-caret 0.75s step-end infinite, pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes typing {
+      0% { width: 0; }
+      100% { width: 100%; }
+    }
+
+    @keyframes blink-caret {
+      from, to { opacity: 0; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(0, 229, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); }
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 300;
+      letter-spacing: 1px;
+      margin-top: 10px;
+    }
+
+    .vip-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--gold), #ff6d00);
+      color: #000;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      margin-top: 15px;
+      box-shadow: 0 0 15px rgba(255, 171, 0, 0.5);
+      animation: badgePulse 2s infinite alternate;
+    }
+
+    @keyframes badgePulse {
+      from { transform: scale(1); box-shadow: 0 0 15px rgba(255, 171, 0, 0.5); }
+      to { transform: scale(1.05); box-shadow: 0 0 25px rgba(255, 171, 0, 0.7); }
+    }
+
+    .view-channel {
+      display: inline-block;
+      margin-bottom: 35px;
+      padding: 16px 36px;
+      font-weight: 600;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #000;
+      box-shadow: 0 5px 15px rgba(0, 229, 255, 0.4);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      letter-spacing: 0.5px;
+    }
+
+    .view-channel::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: all 0.6s ease;
+      z-index: -1;
+    }
+
+    .view-channel:hover::before {
+      left: 100%;
+    }
+
+    .view-channel:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 229, 255, 0.6);
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .btn {
+      padding: 18px;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 16px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: rgba(30, 30, 40, 0.7);
+      backdrop-filter: blur(10px);
+      animation: buttonEntrance 0.6s ease-out backwards;
+    }
+
+    .btn:nth-child(1) { animation-delay: 0.1s; }
+    .btn:nth-child(2) { animation-delay: 0.2s; }
+    .btn:nth-child(3) { animation-delay: 0.3s; }
+
+    @keyframes buttonEntrance {
+      0% { opacity: 0; transform: translateX(-20px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+      z-index: -1;
+      transition: opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    .btn:hover::before {
+      opacity: 1;
+    }
+
+    .telegram {
+      color: #0088cc;
+      box-shadow: 0 4px 12px rgba(0, 136, 204, 0.3);
+    }
+
+    .telegram:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(0, 136, 204, 0.5);
+      background: rgba(0, 136, 204, 0.1);
+    }
+
+    .whatsapp {
+      color: #25d366;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    }
+
+    .whatsapp:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(37, 211, 102, 0.5);
+      background: rgba(37, 211, 102, 0.1);
+    }
+
+    .youtube {
+      color: #ff0000;
+      box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
+    }
+
+    .youtube:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(255, 0, 0, 0.5);
+      background: rgba(255, 0, 0, 0.1);
+    }
+
+    .flag {
+      width: 28px;
+      vertical-align: middle;
+      margin-left: 8px;
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.5);
+      letter-spacing: 0.5px;
+    }
+
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: var(--primary);
+      border-radius: 50%;
+      opacity: 0;
+      animation: particleFloat 10s linear infinite;
+    }
+
+    @keyframes particleFloat {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.7; }
+      90% { opacity: 0.7; }
+      100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+    }
+
+    /* New typing effect styles */
+    .typing-effect-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    .typing-text-gradient {
+      background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 100%;
+      animation: gradient-shift 3s ease-in-out infinite;
+    }
+
+    @keyframes gradient-shift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .typing-cursor {
+      display: inline-block;
+      width: 3px;
+      height: 1.2em;
+      background-color: var(--primary);
+      margin-left: 2px;
+      vertical-align: middle;
+      animation: typing-cursor-blink 1s infinite;
+    }
+
+    @keyframes typing-cursor-blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 35px 25px;
+      }
+
+      .title {
+        font-size: 2rem;
+        height: 50px;
+      }
+
+      .btn, .view-channel {
+        font-size: 15px;
+        padding: 16px;
+      }
+      
+      .logo img {
+        width: 120px;
+        height: 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-elements">
+    <div class="bg-grid"></div>
+    <div class="bg-element"></div>
+    <div class="bg-element"></div>
+    <div class="bg-element"></div>
+  </div>
+  
+  <div class="particles" id="particles"></div>
+  
+  <div class="card">
+    <div class="logo">
+      <div class="logo-container">
+        <img src="https://i.postimg.cc/QCxbnSS4/20250811-204952.jpg" alt="PXA Logo" />
+      </div>
+    </div>
+    
+    <div class="title-container">
+      <div class="title">
+        <div class="typing-effect-wrapper">
+          <span class="typing-text-gradient" id="typing-text">PRO × ARMY (PXA)</span>
+          <span class="typing-cursor"></span>
+        </div>
+      </div>
+      <div class="subtitle">EXCLUSIVE COMMUNITY</div>
+      <div class="vip-badge">VIP MEMBERS</div>
+    </div>
+
+    <a href="https://whatsapp.com/channel/0029VbBEJMF6BIEfr2A0w32q" class="view-channel" target="_blank">
+      <i class="fas fa-eye"></i> View Channel
+    </a>
+
+    <div class="buttons">
+      <a href="https://t.me/+koSxIhaaGLNhYzY0" class="btn telegram" target="_blank">
+        <i class="fab fa-telegram"></i>
+        <span>Join Telegram</span>
+      </a>
+      <a href="https://whatsapp.com/channel/0029VbBAfis3LdQcXDcwNY1J" class="btn whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+        <span>Join WhatsApp</span>
+      </a>
+      <a href="https://youtube.com/@abheebhai?si=YgiPuXScna5VE2Si" class="btn youtube" target="_blank">
+        <i class="fab fa-youtube"></i>
+        <span>YouTube Channel</span>
+      </a>
+    </div>
+    
+    <div class="footer">
+      PRO × ARMY (PXA) | Exclusive VIP Access
+    </div>
+  </div>
+
+  <script>
+    // Create floating particles
+    document.addEventListener('DOMContentLoaded', function() {
+      const particlesContainer = document.getElementById('particles');
+      const colors = ['#00e5ff', '#2979ff', '#7c4dff', '#ffab00'];
+      
+      for (let i = 0; i < 25; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // Random properties
+        const size = Math.random() * 3 + 1;
+        const left = Math.random() * 100;
+        const delay = Math.random() * 10;
+        const duration = Math.random() * 8 + 7;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${left}%`;
+        particle.style.animationDelay = `${delay}s`;
+        particle.style.animationDuration = `${duration}s`;
+        particle.style.background = color;
+        
+        particlesContainer.appendChild(particle);
+      }
+      
+      // Enhanced typing effect with multiple phrases
+      const typingElement = document.getElementById('typing-text');
+      const phrases = [
+        "PRO × ARMY (PXA)",
+        "VIP COMMUNITY",
+        "EXCLUSIVE ACCESS",
+        "PREMIUM CONTENT"
+      ];
+      
+      let currentPhraseIndex = 0;
+      let currentCharIndex = 0;
+      let isDeleting = false;
+      let isWaiting = false;
+      
+      function typeEffect() {
+        const currentPhrase = phrases[currentPhraseIndex];
+        
+        if (isDeleting) {
+          // Delete characters
+          typingElement.textContent = currentPhrase.substring(0, currentCharIndex - 1);
+          currentCharIndex--;
+        } else {
+          // Type characters
+          typingElement.textContent = currentPhrase.substring(0, currentCharIndex + 1);
+          currentCharIndex++;
+        }
+        
+        // Determine typing speed
+        let typeSpeed = isDeleting ? 50 : 100;
+        
+        // If phrase is complete
+        if (!isDeleting && currentCharIndex === currentPhrase.length) {
+          isWaiting = true;
+          typeSpeed = 2000; // Pause at end of phrase
+          isDeleting = true;
+        } 
+        // If phrase is fully deleted
+        else if (isDeleting && currentCharIndex === 0) {
+          isDeleting = false;
+          isWaiting = false;
+          currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+          typeSpeed = 500; // Pause before starting next phrase
+        }
+        
+        setTimeout(typeEffect, typeSpeed);
+      }
+      
+      // Start the typing effect after a short delay
+      setTimeout(typeEffect, 1000);
+    });
+  </script>
+</body>
+</html>
